@@ -27,8 +27,8 @@ app.use(cookieSession({
     name: 'streamheavens',
     secret: process.env.COOKIE_SECRET,
     maxAge: 90*24*60*60*1000,
-    httpOnly: false,
-    secure: false
+    httpOnly: true,
+    secure: true
 }));
 app.use(passport.initialize());
 app.use(passport.session());
