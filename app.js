@@ -28,7 +28,7 @@ app.use(cookieSession({
     secret: process.env.COOKIE_SECRET,
     maxAge: 90*24*60*60*1000,
     httpOnly: false,
-    secure: true
+    secure: false
 }));
 app.use(passport.initialize());
 app.use(passport.session());
