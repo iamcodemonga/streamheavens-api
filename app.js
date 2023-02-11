@@ -28,12 +28,13 @@ app.use(cookieSession({
     secret: process.env.COOKIE_SECRET,
     maxAge: 90*24*60*60*1000,
     httpOnly: false,
-    secure: false
+    secure: true
 }));
 app.use(passport.initialize());
 app.use(passport.session());
 
-mongoose.connect(process.env.MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.set('strictQuery', true )
+mongoose.connect(process.env.MONGODB_URL);
 
 app.use('/', userRoute);
 app.use('/auth', authRoute);
