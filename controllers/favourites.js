@@ -4,13 +4,14 @@ const Likes = require('../model/likes');
 exports.userFavourites = async(req, res) => {
 
     let message;
+    const { userid } = req.params;
 
-    if (!req.activeUser) {
+    if (!userid) {
         message = { status: "failed", statusCode: 405, message: "You are not logged in!" }
         return res.json({ message });
     }
 
-    const favourites = await Likes.find({ userId: req.activeUser._id});
+    const favourites = await Likes.find({ userId: userid});
     message = { status: "ok", statusCode: 200, message: "successful!" }
     return res.json({ message, favourites })
 

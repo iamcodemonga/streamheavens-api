@@ -4,7 +4,7 @@ const { authUser, userProfile, editUser } = require('../controllers/user')
 
 router.get('/', loggedInUser, authUser);
 
-router.get('/:userid',  loggedInUser, userProfile);
+router.get('/:userid', userProfile);
 
 router.put('/edit/:userid', editUser);
 

@@ -7,21 +7,16 @@ exports.authUser = (req, res) => {
 
 exports.userProfile = async(req, res) => {
 
-    let message, favourites, user;
+    let user;
+    let { userid } = req.params;
 
-    if (!req.activeUser) {
-        message = { status: "failed", statusCode: 405, message: "You are not logged in!" }
-        return res.json({ message });
+    if (!userid) {
+        return res.json(null);
     }
 
-    if( req.activeUser != req.params.id ) {
-        message = { status: "failed", statusCode: 405, message: "Invalid user ID!" }
-        return res.json({ message });
-    }
-
-    message = { status: "ok", statusCode: 200, message: "Welcome to your profile!" }
-    favourites = await Likes.find({ userId: req.activeUser._id });
-    res.json({ message, favourites, user: req.activeUser });
+    user = await User.findById(userid);
+    
+    res.json(user);
 
 }
 

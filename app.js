@@ -12,7 +12,7 @@ const LikeRoutes = require('./routes/favourites')
 const googleSetup = require('./config/googlepassport');
 
 const app = express();
-const port = process.env.PORT || 5004
+const port = process.env.PORT || 3000;
 const clientRoot = process.env.CLIENT_ROOT;
 
 app.use(cors({
@@ -25,10 +25,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieSession({
     name: 'streamheavens',
+    keys: ['streamie', '@001'],
     secret: process.env.COOKIE_SECRET,
     maxAge: 90*24*60*60*1000,
     httpOnly: false,
-    secure: true
+    secure: true,
+    sameSite: 'none'
 }));
 app.use(passport.initialize());
 app.use(passport.session());
