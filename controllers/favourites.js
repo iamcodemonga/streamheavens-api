@@ -33,6 +33,7 @@ exports.Like = async(req, res) => {
         try {
             //delete from database
             const deleteLike = await Likes.deleteOne({ userId, poster }).exec();
+            console.log(deleteLike)
             //remove from user favourites
             await User.findByIdAndUpdate(userId, { $pull: { favourites: poster } })
             message = { status: "ok", statusCode: 200, message: "removed!" }
@@ -46,6 +47,7 @@ exports.Like = async(req, res) => {
         try {
             //add to database
             const createLike = await Likes.create({userId, poster, title, released, series});
+            console.log(createLike)
             // add to user favourites
             await User.findByIdAndUpdate(userId, { $addToSet: { favourites: poster } })
             message = { status: "ok", statusCode: 200, message: "added!" }

@@ -42,7 +42,7 @@ app.use('/', userRoute);
 app.use('/auth', authRoute);
 app.use('/password', passwordRoute);
 app.use('/upload', uploadRoute);
-app.use('/favourites', LikeRoutes )
+app.use('/favourites', LikeRoutes );
 
 
 app.listen(port, () => {

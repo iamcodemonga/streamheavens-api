@@ -7,16 +7,19 @@ exports.authUser = (req, res) => {
 
 exports.userProfile = async(req, res) => {
 
-    let user;
     let { userid } = req.params;
 
-    if (!userid) {
+    if (!userid || userid === "null") {
         return res.json(null);
     }
 
-    user = await User.findById(userid);
-    
-    res.json(user);
+    try {
+        let user = await User.findById(userid);
+        let { __v, password, createdAt, updatedAt, ...others } = user._doc;
+        res.json(others);
+    } catch (error) {
+        console.log(error.message)
+    }
 
 }
 
